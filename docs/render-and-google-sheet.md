@@ -29,7 +29,7 @@ To get auto-deploy, connect GitHub in Render and switch the service's source to 
    shared with `fusion-server@charactermerge-staging.iam.gserviceaccount.com` as Viewer, General access **Restricted**.
    Edit content there. Anything new must keep the same column order.
 2. **Render account:** https://dashboard.render.com/register, easiest with **GitHub** so it can see the repo.
-3. **Dashboard → New → Blueprint →** repo `mnTis325/CharacterMerge` → it reads `render.yaml`.
+3. **Dashboard → New → Blueprint →** repo `charactermerge-droid/Character-Merge` → it reads `render.yaml`.
 4. When asked for **`GOOGLE_SA_JSON`**, paste the entire contents of `server/google-sa.min.json` (one line).
 5. **Apply.** First build takes a few minutes. The service URL looks like `https://charactermerge-server-xxxx.onrender.com`.
 6. Check `<url>/health`: it should show `"characters":4,"merges":6`.

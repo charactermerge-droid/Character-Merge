@@ -1,5 +1,6 @@
 import { createLocalStorage } from './local.js';
 import { createAzureStorage } from './azure.js';
+import { createSupabaseStorage } from './supabase.js';
 
 /**
  * Picks a backend and adds two memo layers on top of it:
@@ -9,8 +10,11 @@ import { createAzureStorage } from './azure.js';
  *  - successful blob-property lookups are remembered briefly.
  * Failures are never cached.
  */
-export async function createStorage(cfg) {
-  const impl = cfg.storage === 'azure' ? await createAzureStorage(cfg) : createLocalStorage(cfg);
+export async function createStorage(cfg, deps = {}) {
+  const impl =
+    cfg.storage === 'azure' ? await createAzureStorage(cfg)
+    : cfg.storage === 'supabase' ? await createSupabaseStorage(cfg, deps)
+    : createLocalStorage(cfg);
   const ttlMs = cfg.sasTtlMinutes * 60 * 1000;
   const propsTtlMs = cfg.blobPropsCacheSeconds * 1000;
   const urls = new Map();   // key -> { url, expiresAt, expiresMs }

@@ -27,10 +27,12 @@ export function loadConfig(env = process.env, { cwd = process.cwd() } = {}) {
     googleSaJson: env.GOOGLE_SA_JSON || '',
     googleSaJsonFile: env.GOOGLE_SA_JSON_FILE ? path.resolve(cwd, env.GOOGLE_SA_JSON_FILE) : '',
 
-    storage: oneOf('STORAGE', env.STORAGE || 'local', ['local', 'azure']),
+    storage: oneOf('STORAGE', env.STORAGE || 'local', ['local', 'azure', 'supabase']),
     localStorageDir: path.resolve(cwd, env.LOCAL_STORAGE_DIR || './local-storage'),
     localSigningSecret: env.LOCAL_SIGNING_SECRET || randomBytes(32).toString('hex'),
     azureStorageAccount: env.AZURE_STORAGE_ACCOUNT || '',
+    supabaseUrl: (env.SUPABASE_URL || '').replace(/\/+$/, ''),
+    supabaseServiceKey: env.SUPABASE_SERVICE_KEY || '',
     sasTtlMinutes: int(env.SAS_TTL_MINUTES, 60),
     blobPropsCacheSeconds: int(env.BLOB_PROPS_CACHE_SECONDS, 60),
   };
@@ -50,6 +52,10 @@ export function loadConfig(env = process.env, { cwd = process.cwd() } = {}) {
       // (no key file exists anywhere); locally it is `gcloud auth application-default login`.
       cfg.googleSaEmail = env.GOOGLE_SA_EMAIL || 'the identity the server runs as';
     }
+  }
+  if (cfg.storage === 'supabase') {
+    if (!/^https:\/\/.+/.test(cfg.supabaseUrl)) throw new Error('SUPABASE_URL is required when STORAGE=supabase (https://<project>.supabase.co)');
+    if (!cfg.supabaseServiceKey) throw new Error('SUPABASE_SERVICE_KEY is required when STORAGE=supabase (the secret / service_role key)');
   }
   if (cfg.storage === 'azure' && !cfg.azureStorageAccount) {
     throw new Error('AZURE_STORAGE_ACCOUNT is required when STORAGE=azure');
