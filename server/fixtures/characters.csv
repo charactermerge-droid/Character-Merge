@@ -1,0 +1,6 @@
+id,display_name,thumb_blob,tier,selectable_first,enabled
+tiger,Tiger,tiger.png,rare,TRUE,TRUE
+rabbit,Rabbit,rabbit.png,common,TRUE,TRUE
+frog,Frog,frog.png,common,TRUE,TRUE
+owl,Owl,owl.png,legendary,TRUE,TRUE
+dragon,Dragon,dragon.png,legendary,TRUE,FALSE

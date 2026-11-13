@@ -1,0 +1,8 @@
+char_a,char_b,result_id,result_name,video_blob,enabled,notes
+tiger,rabbit,tigbit,Tigbit,rabbit__tiger.mp4,TRUE,placeholder
+tiger,frog,tigrog,Tigrog,frog__tiger.mp4,TRUE,placeholder
+tiger,owl,tigowl,Tigowl,owl__tiger.mp4,TRUE,placeholder
+rabbit,frog,frabbit,Frabbit,frog__rabbit.mp4,TRUE,placeholder
+rabbit,owl,owlbit,Owlbit,owl__rabbit.mp4,TRUE,placeholder
+frog,owl,frowl,Frowl,frog__owl.mp4,TRUE,placeholder
+tiger,dragon,tigron,Tigron,dragon__tiger.mp4,FALSE,"not approved yet, and dragon is disabled"

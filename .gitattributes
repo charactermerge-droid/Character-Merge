@@ -1,0 +1,34 @@
+# Normalize text in the repo; Git checks out with native line endings.
+* text=auto
+
+# Unity YAML. Treated as text so diffs/merges work, but never "fixed up" by filters.
+*.unity     text eol=lf
+*.asset     text eol=lf
+*.prefab    text eol=lf
+*.meta      text eol=lf
+*.mat       text eol=lf
+*.asmdef    text eol=lf
+*.inputactions text eol=lf
+
+# Source
+*.cs        text diff=csharp
+*.js        text
+*.json      text
+*.md        text
+*.csv       text
+*.py        text
+*.yml       text
+*.yaml      text
+*.ps1       text eol=crlf
+*.sh        text eol=lf
+
+# Binary: never diff or convert
+*.mp4       binary
+*.png       binary
+*.jpg       binary
+*.wav       binary
+*.ogg       binary
+*.ttf       binary
+*.dll       binary
+*.so        binary
+*.unitypackage binary
