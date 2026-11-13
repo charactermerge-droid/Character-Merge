@@ -5,7 +5,12 @@ Google Sheet ──(Sheets API, read-only, as fusion-server@charactermerge-stagi
                                                                                     └─ placeholder thumbs/videos from server/local-storage
 ```
 
-Defined in [`render.yaml`](../render.yaml) at the repo root. Every push to `main` redeploys.
+**Live: https://charactermerge.onrender.com** (Render service `CharacterMerge`, Singapore, Free, account charactermerge@gmail.com).
+
+It was created as a plain web service from the *public* repo URL (Blueprints needed a card at the time), so
+**pushes do not auto-deploy**: Render dashboard → CharacterMerge → **Manual Deploy → Deploy latest commit**.
+To get auto-deploy, connect GitHub in Render and switch the service's source to the connected repo.
+[`render.yaml`](../render.yaml) describes the same settings for a Blueprint.
 
 ## Pieces and where they live
 

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c6652d66807c44da3b8a22b881783c, type: 3}
   m_Name: FusionConfig
   m_EditorClassIdentifier: Fusion::Fusion.FusionConfig
-  environment: 0
+  environment: 1
   local:
     serverOrigin: http://localhost:8080
     apiPath: /api/v1
   staging:
-    serverOrigin: 
+    serverOrigin: https://charactermerge.onrender.com
     apiPath: /api/v1
   production:
     serverOrigin: 
