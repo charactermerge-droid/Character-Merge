@@ -10,9 +10,19 @@ Merge characters to get a new character. Pick two characters, get the merged-cre
 2. Unity: open `Assets/Scenes/FusionPrototype.unity` and press Play.
    (Menu **Fusion > Create Prototype Scene** rebuilds it; **Fusion > Clear Device Video Cache** wipes downloads.)
 
-All client settings and URLs live in one asset: `Assets/Settings/FusionConfig.asset`
-(menu **Fusion > Select Config**). Testing on a phone: set `PUBLIC_BASE_URL=http://<pc-lan-ip>:8080`
-in `server/.env` and the same origin in the config's *Server Origin*.
+## Switching servers (Local / Staging / Production)
+
+Every client URL and setting lives in one asset, `Assets/FusionConfig.asset` (menu **Fusion > Select Config**).
+Set **Environment** to Local, Staging or Production and press Play: the game uses that endpoint's
+*Server Origin*. Nothing else changes; thumbnail and video URLs come pre-signed from whichever server you pick.
+The loading screen shows the active environment (turn off *Show Environment On Screen* for release).
+
+- **Local**: `http://localhost:8080` in the editor. On a phone over Wi-Fi use `http://<pc-lan-ip>:8080`, and set
+  `PUBLIC_BASE_URL` in `server/.env` to the same thing (it is baked into the signed URLs).
+- **Staging / Production**: an `https://` origin. Phones block plain HTTP by default.
+
+The config asset ships inside the build, so it holds no secrets. Whether the *server* reads its catalog from CSV
+or a Google Sheet is a server setting: see [docs/switching-to-google-sheet.md](docs/switching-to-google-sheet.md).
 
 ## Where things are
 
