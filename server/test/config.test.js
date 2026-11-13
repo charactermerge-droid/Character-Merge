@@ -16,9 +16,11 @@ test('defaults to local sheet + local storage with no env at all', () => {
   assert.equal(cfg.localSigningSecret.length, 64); // random per boot
 });
 
-test('google source requires SHEET_ID and a key', () => {
+test('google source requires SHEET_ID; without a key it falls back to ambient credentials', () => {
   assert.throws(() => loadConfig({ SHEET_SOURCE: 'google' }), /SHEET_ID/);
-  assert.throws(() => loadConfig({ SHEET_SOURCE: 'google', SHEET_ID: 'x' }), /GOOGLE_SA_JSON/);
+  const adc = loadConfig({ SHEET_SOURCE: 'google', SHEET_ID: 'x', GOOGLE_SA_EMAIL: 'run@p.iam.gserviceaccount.com' });
+  assert.equal(adc.googleSaJson, '');
+  assert.equal(adc.googleSaEmail, 'run@p.iam.gserviceaccount.com');
   assert.throws(() => loadConfig({ SHEET_SOURCE: 'google', SHEET_ID: 'x', GOOGLE_SA_JSON: '{not json' }), /not valid JSON/);
   assert.throws(() => loadConfig({ SHEET_SOURCE: 'google', SHEET_ID: 'x', GOOGLE_SA_JSON: '{"type":"authorized_user"}' }), /service-account key/);
 });
@@ -49,4 +51,10 @@ test('a missing key file is ignored in local mode', () => {
   const cfg = loadConfig({ SHEET_SOURCE: 'local', GOOGLE_SA_JSON_FILE: './does-not-exist.json' });
   assert.equal(cfg.sheetSource, 'local');
   assert.equal(cfg.googleSaJson, '');
+});
+
+test('public base URL: explicit setting wins, then the Render URL, then localhost', () => {
+  assert.equal(loadConfig({ RENDER_EXTERNAL_URL: 'https://fusion.onrender.com/' }).publicBaseUrl, 'https://fusion.onrender.com');
+  assert.equal(loadConfig({ PUBLIC_BASE_URL: 'https://x.test', RENDER_EXTERNAL_URL: 'https://fusion.onrender.com' }).publicBaseUrl, 'https://x.test');
+  assert.equal(loadConfig({ PORT: '9000' }).publicBaseUrl, 'http://localhost:9000');
 });

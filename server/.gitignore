@@ -3,3 +3,4 @@ node_modules/
 *.log
 google-sa*.json
 *.sa.json
+.cloudrun-secrets*.json

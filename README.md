@@ -23,6 +23,7 @@ The loading screen shows the active environment (turn off *Show Environment On S
 
 The config asset ships inside the build, so it holds no secrets. Whether the *server* reads its catalog from CSV
 or a Google Sheet is a server setting: see [docs/switching-to-google-sheet.md](docs/switching-to-google-sheet.md).
+Staging runs on Render's free tier, reading the Google Sheet: [docs/render-and-google-sheet.md](docs/render-and-google-sheet.md).
 
 ## Where things are
 

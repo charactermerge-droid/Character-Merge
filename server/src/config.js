@@ -14,7 +14,8 @@ export function loadConfig(env = process.env, { cwd = process.cwd() } = {}) {
   const cfg = {
     port,
     host: env.HOST || '0.0.0.0',
-    publicBaseUrl: (env.PUBLIC_BASE_URL || `http://localhost:${port}`).replace(/\/+$/, ''),
+    // Baked into every signed URL. Render provides its own public URL; elsewhere set PUBLIC_BASE_URL.
+    publicBaseUrl: (env.PUBLIC_BASE_URL || env.RENDER_EXTERNAL_URL || `http://localhost:${port}`).replace(/\/+$/, ''),
     adminSecret: env.ADMIN_SECRET || '',
     rateLimitPerMinute: int(env.RATE_LIMIT_PER_MINUTE, 120),
 
@@ -37,13 +38,18 @@ export function loadConfig(env = process.env, { cwd = process.cwd() } = {}) {
   if (cfg.sheetSource === 'google') {
     if (!cfg.sheetId) throw new Error('SHEET_ID is required when SHEET_SOURCE=google (the long id in the sheet URL)');
     if (!cfg.googleSaJson && cfg.googleSaJsonFile) cfg.googleSaJson = readKeyFile(cfg.googleSaJsonFile); // only read in google mode
-    if (!cfg.googleSaJson) throw new Error('GOOGLE_SA_JSON or GOOGLE_SA_JSON_FILE is required when SHEET_SOURCE=google');
-    let key;
-    try { key = JSON.parse(cfg.googleSaJson); } catch { throw new Error('GOOGLE_SA_JSON is not valid JSON'); }
-    if (key.type !== 'service_account' || !key.client_email || !key.private_key) {
-      throw new Error('GOOGLE_SA_JSON is not a service-account key (expected type=service_account with client_email and private_key)');
+    if (cfg.googleSaJson) {
+      let key;
+      try { key = JSON.parse(cfg.googleSaJson); } catch { throw new Error('GOOGLE_SA_JSON is not valid JSON'); }
+      if (key.type !== 'service_account' || !key.client_email || !key.private_key) {
+        throw new Error('GOOGLE_SA_JSON is not a service-account key (expected type=service_account with client_email and private_key)');
+      }
+      cfg.googleSaEmail = key.client_email;
+    } else {
+      // No key: Application Default Credentials. On Cloud Run that is the service's own identity
+      // (no key file exists anywhere); locally it is `gcloud auth application-default login`.
+      cfg.googleSaEmail = env.GOOGLE_SA_EMAIL || 'the identity the server runs as';
     }
-    cfg.googleSaEmail = key.client_email;
   }
   if (cfg.storage === 'azure' && !cfg.azureStorageAccount) {
     throw new Error('AZURE_STORAGE_ACCOUNT is required when STORAGE=azure');

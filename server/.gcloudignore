@@ -1,0 +1,12 @@
+# What `gcloud run deploy --source .` must NOT upload.
+node_modules/
+.env
+.env.*
+!.env.example
+google-sa*.json
+*.sa.json
+.cloudrun-secrets*.json
+test/
+*.log
+.git
+.gitignore

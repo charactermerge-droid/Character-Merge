@@ -68,3 +68,4 @@ desktop.ini
 .utmp/
 *.blend1
 *.blend1.meta
+.cloudrun-secrets*.json

@@ -42,7 +42,7 @@ function createGoogleSource(cfg, { sheetsClient = null } = {}) {
     if (sheetsClient) return sheetsClient;
     const { google } = await import('googleapis');
     const auth = new google.auth.GoogleAuth({
-      credentials: JSON.parse(cfg.googleSaJson),
+      ...(cfg.googleSaJson ? { credentials: JSON.parse(cfg.googleSaJson) } : {}), // else ADC
       scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
     });
     sheetsClient = google.sheets({ version: 'v4', auth });
