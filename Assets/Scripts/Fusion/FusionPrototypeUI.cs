@@ -372,7 +372,7 @@ namespace Fusion
 
         static void EnsureEventSystem()
         {
-            if (FindFirstObjectByType<EventSystem>() != null) return;
+            if (FindAnyObjectByType<EventSystem>() != null) return;
             var es = new GameObject("EventSystem", typeof(EventSystem));
 #if ENABLE_INPUT_SYSTEM
             es.AddComponent<InputSystemUIInputModule>();
