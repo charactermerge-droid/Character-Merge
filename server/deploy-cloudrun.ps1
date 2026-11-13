@@ -12,7 +12,7 @@ param(
     [Parameter(Mandatory = $true)] [string] $Project,
     [string] $Region = 'asia-south1',
     [string] $Service = 'fusion-server',
-    [string] $SheetId = '1BwxZy5q79v2PmZ76pL10RY-K5Tbzi5adH3U___6-kNw',
+    [string] $SheetId = '1UfYZ1OclLClZyjYr330JikW95HbJdO5uDnBjA69edWk',
     [string] $Storage = 'local',      # placeholder videos ship inside the container
     [int]    $MaxInstances = 2        # hard cap on scale-out, so cost can never run away
 )

@@ -18,7 +18,7 @@ services:
       - key: SHEET_SOURCE
         value: google
       - key: SHEET_ID
-        value: 1BwxZy5q79v2PmZ76pL10RY-K5Tbzi5adH3U___6-kNw
+        value: 1UfYZ1OclLClZyjYr330JikW95HbJdO5uDnBjA69edWk
       - key: SHEET_REFRESH_SECONDS
         value: "300"
       # Placeholder thumbs/videos ship with the repo (server/local-storage) and are served with signed URLs.

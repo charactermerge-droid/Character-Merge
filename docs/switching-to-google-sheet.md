@@ -2,7 +2,7 @@
 
 Current state: **local**. The server reads `server/fixtures/characters.csv` and `server/fixtures/merges.csv`.
 Target: the same two tabs in the Google Sheet
-`https://docs.google.com/spreadsheets/d/1BwxZy5q79v2PmZ76pL10RY-K5Tbzi5adH3U___6-kNw/edit`.
+`https://docs.google.com/spreadsheets/d/1UfYZ1OclLClZyjYr330JikW95HbJdO5uDnBjA69edWk/edit` (owned by charactermerge@gmail.com, private).
 
 The switch is **server-side only**. The Unity client never talks to the sheet — it only calls the server —
 so nothing in `FusionConfig.asset` or any C# file changes. Storage (thumbnails/videos) is a separate switch

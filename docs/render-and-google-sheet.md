@@ -11,6 +11,7 @@ Defined in [`render.yaml`](../render.yaml) at the repo root. Every push to `main
 
 | Piece | Where | Secret? |
 |---|---|---|
+| Content sheet "CharacterMerge Content" | charactermerge@gmail.com (private) | no |
 | Google Cloud project `charactermerge-staging` | charactermerge@gmail.com | no billing needed: Sheets API + service accounts are free |
 | Service account `fusion-server@charactermerge-staging.iam.gserviceaccount.com` | that project | no |
 | Its JSON key | `server/google-sa.json` (+ single-line copy `google-sa.min.json`), **gitignored**; and Render env `GOOGLE_SA_JSON` | **yes** |
@@ -19,9 +20,9 @@ Defined in [`render.yaml`](../render.yaml) at the repo root. Every push to `main
 
 ## One-time setup
 
-1. **Sheet:** tabs named `characters` and `merges`. Share with
-   `fusion-server@charactermerge-staging.iam.gserviceaccount.com` as **Viewer**, then set General access to
-   **Restricted** (the repo is public and contains the sheet ID).
+1. **Sheet** (done): "CharacterMerge Content", owned by charactermerge@gmail.com, tabs `characters` and `merges`,
+   shared with `fusion-server@charactermerge-staging.iam.gserviceaccount.com` as Viewer, General access **Restricted**.
+   Edit content there. Anything new must keep the same column order.
 2. **Render account:** https://dashboard.render.com/register, easiest with **GitHub** so it can see the repo.
 3. **Dashboard → New → Blueprint →** repo `mnTis325/CharacterMerge` → it reads `render.yaml`.
 4. When asked for **`GOOGLE_SA_JSON`**, paste the entire contents of `server/google-sa.min.json` (one line).
