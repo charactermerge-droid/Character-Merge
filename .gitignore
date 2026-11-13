@@ -69,3 +69,6 @@ desktop.ini
 *.blend1
 *.blend1.meta
 .cloudrun-secrets*.json
+
+# Media lives in Supabase Storage. A local copy may exist for STORAGE=local; never commit it.
+server/local-storage/

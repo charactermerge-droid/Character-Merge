@@ -31,7 +31,7 @@ Staging runs on Render's free tier, reading the Google Sheet: [docs/render-and-g
 |---|---|
 | `server/` | Fastify API, sheet loader, signed-URL storage (local + Azure), tests, placeholder generator — see `server/README.md` |
 | `server/fixtures/*.csv` | the two "sheet tabs": characters and merges (`enabled` = publish switch) |
-| `server/local-storage/` | placeholder thumbs + videos (stands in for the private Azure containers) |
+| Supabase Storage | thumbnails + videos, private buckets `thumbs` / `merges`; upload with `npm run upload` (see docs/media-in-supabase.md) |
 | `Assets/Scripts/Fusion/` | client: `FusionConfig` (all settings/URLs), DTOs, `FusionApi`, `VideoCache` (download once, ETag-validated), `ThumbnailLoader`, `FusionFlow` (state machine) |
 | `Assets/Scripts/Fusion/FusionPrototypeUI.cs` | throwaway runtime-built UI — replace with real art/VFX, `FusionFlow` stays |
 | `Assets/Scripts/Fusion/Tests/` | PlayMode tests that drive the full flow against the local server |

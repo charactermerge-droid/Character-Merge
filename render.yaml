@@ -21,9 +21,13 @@ services:
         value: 1UfYZ1OclLClZyjYr330JikW95HbJdO5uDnBjA69edWk
       - key: SHEET_REFRESH_SECONDS
         value: "300"
-      # Placeholder thumbs/videos ship with the repo (server/local-storage) and are served with signed URLs.
+      # Thumbnails and videos live in private Supabase buckets (thumbs, merges); the server signs short-lived URLs.
       - key: STORAGE
-        value: local
+        value: supabase
+      - key: SUPABASE_URL
+        value: https://qjqujgephwmqyfvvdcvz.supabase.co
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
       # PUBLIC_BASE_URL is not needed: the server uses RENDER_EXTERNAL_URL, which Render sets.
       - key: ADMIN_SECRET
         generateValue: true
